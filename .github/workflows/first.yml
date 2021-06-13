@@ -37,13 +37,13 @@ jobs:
         uses: NuGet/setup-nuget@v1.0.5
 
       - name: Restore NuGet packages
-        run: nuget restore $SLN_PATH
+        run: nuget restore EmptyMVC/EmptyMVC.sln
         
       - name: Build the Solution
-        run: msbuild $SLN_PATH
+        run: msbuild EmptyMVC/EmptyMVC.sln
         
       - name: Run Tests
-        run: $XUNIT_CONSOLE_PATH $TEST_DLL_PATH -xml test_results.xml
+        run: EmptyMVC/packages/xunit.runner.console.2.4.1/tools/net47/xunit.console.exe EmptyMVC/EmptyMVC.Tests/bin/Debug/EmptyMVC.Tests.dll -xml test_results.xml
         
       - name: View Tests
         uses: dorny/test-reporter@v1.4.3
