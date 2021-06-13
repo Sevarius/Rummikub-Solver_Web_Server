@@ -22,8 +22,13 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        env: 
+          SLN_PATH: EmptyMVC/EmptyMVC.sln
+          XUNIT_CONSOLE_PATH: EmptyMVC/packages/xunit.runner.console.2.4.1/tools/net47/xunit.console.exe
+          TEST_DLL_PATH: EmptyMVC/EmptyMVC.Tests/bin/Debug/EmptyMVC.Tests.dll
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1
@@ -32,7 +37,16 @@ jobs:
         uses: NuGet/setup-nuget@v1.0.5
 
       - name: Restore NuGet packages
-        run: nuget restore EmptyMVC/EmptyMVC.sln
+        run: nuget restore $SLN_PATH
         
       - name: Build the Solution
-        run: msbuild EmptyMVC/EmptyMVC.sln
+        run: msbuild $SLN_PATH
+        
+      - name: Run Tests
+        run: $XUNIT_CONSOLE_PATH $TEST_DLL_PATH -xml test_results.xml
+        
+      - name: View Tests
+        uses: dorny/test-reporter@v1.4.3
+        with:
+          path: test_results.xml
+          reporter: only-failed
