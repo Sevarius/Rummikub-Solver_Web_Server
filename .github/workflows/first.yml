@@ -43,4 +43,4 @@ jobs:
         with:
           name: XUnit Tests
           path: test_results.xml
-          reporter: jest-Junit
+          reporter: jest-junit
