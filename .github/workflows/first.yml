@@ -3,15 +3,7 @@
 name: First CI
 
 # Controls when the action will run. 
-on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+on: [push, pull_request, workflow_dispatch]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -22,8 +14,13 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        env: 
+          SLN_PATH: EmptyMVC/EmptyMVC.sln
+          XUNIT_CONSOLE_PATH: EmptyMVC/packages/xunit.runner.console.2.4.1/tools/net47/xunit.console.exe
+          TEST_DLL_PATH: EmptyMVC/EmptyMVC.Tests/bin/Debug/EmptyMVC.Tests.dll
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1
@@ -36,3 +33,12 @@ jobs:
         
       - name: Build the Solution
         run: msbuild EmptyMVC/EmptyMVC.sln
+        
+      - name: Run Tests
+        run: EmptyMVC/packages/xunit.runner.console.2.4.1/tools/net47/xunit.console.exe EmptyMVC/EmptyMVC.Tests/bin/Debug/EmptyMVC.Tests.dll -junit test_results.xml
+        
+      - name: View Tests
+        if: success() || failure()
+        uses: mikepenz/action-junit-report@v2.4.2
+        with:
+          report_paths: test_results.xml
