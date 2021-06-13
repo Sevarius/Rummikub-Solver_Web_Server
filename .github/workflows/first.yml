@@ -35,7 +35,7 @@ jobs:
         run: msbuild EmptyMVC/EmptyMVC.sln
         
       - name: Run Tests
-        run: EmptyMVC/packages/xunit.runner.console.2.4.1/tools/net47/xunit.console.exe EmptyMVC/EmptyMVC.Tests/bin/Debug/EmptyMVC.Tests.dll -xml test_results.xml
+        run: EmptyMVC/packages/xunit.runner.console.2.4.1/tools/net47/xunit.console.exe EmptyMVC/EmptyMVC.Tests/bin/Debug/EmptyMVC.Tests.dll -junit test_results.xml
         
       - name: View Tests
         if: success() || failure()
@@ -43,4 +43,4 @@ jobs:
         with:
           name: XUnit Tests
           path: test_results.xml
-          reporter: dotnet-trx
+          reporter: jest-Junit
