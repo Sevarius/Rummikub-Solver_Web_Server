@@ -46,8 +46,9 @@ jobs:
         run: EmptyMVC/packages/xunit.runner.console.2.4.1/tools/net47/xunit.console.exe EmptyMVC/EmptyMVC.Tests/bin/Debug/EmptyMVC.Tests.dll -xml test_results.xml
         
       - name: View Tests
-        if: ${{ success() }} || ${{ failure() }}
+        if: success() || failure()
         uses: dorny/test-reporter@v1.4.3
         with:
+          name: XUnit Tests
           path: test_results.xml
           reporter: only-failed
