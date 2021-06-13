@@ -10,5 +10,11 @@ namespace EmptyMVC.Tests
         {
             Assert.Equal(1, 1);
         }
+        
+        [Fact]
+        public void TestMethod2()
+        {
+            Assert.Equal(1, 2);
+        }
     }
 }
