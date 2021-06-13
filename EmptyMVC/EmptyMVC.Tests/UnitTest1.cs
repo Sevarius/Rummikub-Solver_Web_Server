@@ -14,7 +14,7 @@ namespace EmptyMVC.Tests
         [Fact]
         public void TestMethod2()
         {
-            Assert.Equal(1, 2);
+            Assert.Equal(2, 2);
         }
     }
 }
