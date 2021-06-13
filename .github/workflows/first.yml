@@ -39,8 +39,6 @@ jobs:
         
       - name: View Tests
         if: success() || failure()
-        uses: dorny/test-reporter@v1.4.3
+        uses: mikepenz/action-junit-report@v2.4.2
         with:
-          name: XUnit Tests
-          path: test_results.xml
-          reporter: jest-junit
+          report_paths: test_results.xml
