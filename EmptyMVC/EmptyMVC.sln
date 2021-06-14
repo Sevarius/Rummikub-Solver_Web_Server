@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyMVC", "EmptyMVC\EmptyM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyMVC.Tests", "EmptyMVC.Tests\EmptyMVC.Tests.csproj", "{35C71CF6-F024-4861-B412-45502E56DD3D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathModel", "Model\MathModel.csproj", "{768B9C58-F9B3-437E-97A6-E56FE796FF78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{35C71CF6-F024-4861-B412-45502E56DD3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35C71CF6-F024-4861-B412-45502E56DD3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35C71CF6-F024-4861-B412-45502E56DD3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{768B9C58-F9B3-437E-97A6-E56FE796FF78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{768B9C58-F9B3-437E-97A6-E56FE796FF78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{768B9C58-F9B3-437E-97A6-E56FE796FF78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{768B9C58-F9B3-437E-97A6-E56FE796FF78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
