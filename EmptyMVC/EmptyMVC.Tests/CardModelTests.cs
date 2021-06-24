@@ -48,6 +48,25 @@ namespace EmptyMVC.Tests
 
             Assert.False(res);
         }
+
+        [Fact]
+        public void CardSortTest()
+        {
+            var listToSort = new List<Card>()
+            {
+                new Card(CardColor.Red, 1),
+                new Card(CardColor.Joker, 0),
+                new Card(CardColor.Blue, 1),
+                new Card(CardColor.Joker, 0)
+            };
+
+            listToSort.Sort();
+
+            Assert.Equal(CardColor.Red, listToSort[0].Color);
+            Assert.Equal(CardColor.Blue, listToSort[1].Color);
+            Assert.Equal(CardColor.Joker, listToSort[2].Color);
+            Assert.Equal(CardColor.Joker, listToSort[3].Color);
+        }
     }
 
     public class GoodCombinations : TheoryData<CombinationType, CombinationModel>
@@ -60,15 +79,15 @@ namespace EmptyMVC.Tests
             {
                 (CombinationType.Color, "1r 2r 3r"),
                 (CombinationType.Color, "1bb 2bb 3bb 4bb 5bb 6bb 7bb 8bb 9bb 10bb 11bb 12bb 13bb"),
-                (CombinationType.Color, "1r j j"),
-                (CombinationType.Color, "j j 3b"),
                 (CombinationType.Color, "2r j 4r"),
-                (CombinationType.Color, "11y j j"),
-                (CombinationType.Color, "j 12b j"),
-                (CombinationType.Color, "j j 13y"),
                 (CombinationType.Color, "j 2r 3r 4r j"),
 
                 (CombinationType.Value, "3r 3y 3b 3bb"),
+                (CombinationType.Value, "1r j j"),
+                (CombinationType.Value, "j j 3b"),
+                (CombinationType.Value, "11y j j"),
+                (CombinationType.Value, "j 12b j"),
+                (CombinationType.Value, "j j 13y"),
                 (CombinationType.Value, "13r 13y j j"),
                 (CombinationType.Value, "1y 1bb j"),
                 (CombinationType.Value, "j j 10y 10b"),
@@ -79,7 +98,7 @@ namespace EmptyMVC.Tests
 
             foreach (var test in testsList)
             {
-                Add(test.Item1, converter.stringToCombination(test.Item2));
+                Add(test.Item1, converter.stringToCombination(test.Item2, CombinationStringFormat.Short));
             }
 
             ;
@@ -113,7 +132,7 @@ namespace EmptyMVC.Tests
 
             foreach (var test in testsList)
             {
-                Add(converter.stringToCombination(test));
+                Add(converter.stringToCombination(test, CombinationStringFormat.Short));
             }
         }
     }

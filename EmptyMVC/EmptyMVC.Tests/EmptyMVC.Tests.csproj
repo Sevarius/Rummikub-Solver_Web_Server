@@ -72,8 +72,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CombinationCheckerTests.cs" />
+    <Compile Include="CombinationModelTests.cs" />
     <Compile Include="MathModelTests.cs" />
     <Compile Include="CardModelTests.cs" />
+    <Compile Include="MechanicsMapsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringToCombinationConverter.cs" />
   </ItemGroup>
@@ -81,13 +84,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CardModel\MechanicsModel.csproj">
-      <Project>{9a4ac7bd-b501-4905-980b-f2b5e9aba15c}</Project>
-      <Name>MechanicsModel</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EmptyMVC\EmptyMVC.csproj">
       <Project>{6120C62B-F1A5-45D1-93F3-76641328762A}</Project>
       <Name>EmptyMVC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MechanicsMaps\MechanicsMaps.csproj">
+      <Project>{9ccbbb5c-fb48-4e12-bad7-c98548fb3ed6}</Project>
+      <Name>MechanicsMaps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MechanicsModel\MechanicsModel.csproj">
+      <Project>{9a4ac7bd-b501-4905-980b-f2b5e9aba15c}</Project>
+      <Name>MechanicsModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\MathModel.csproj">
       <Project>{768b9c58-f9b3-437e-97a6-e56fe796ff78}</Project>
