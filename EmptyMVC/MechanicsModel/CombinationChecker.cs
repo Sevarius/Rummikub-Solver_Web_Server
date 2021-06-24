@@ -12,7 +12,6 @@ namespace MechanicsModel
     /// </summary>
     public class CombinationChecker
     {
-        
         /// <summary>
         /// Основная функция проверки комбинации фишек
         /// </summary>
@@ -32,19 +31,19 @@ namespace MechanicsModel
             // выясняем, верна ли комбинация
             var ColorFlag = CheckCombinationColorType(combination);
 
-            var NumberFlag = CheckCombinationNumberType(combination);
+            var ValueFlag = CheckCombinationNumberType(combination);
 
-            if (!ColorFlag && !NumberFlag)
+            if (!ColorFlag && !ValueFlag)
                 return (false, CombinationType.Unknown);
 
-            return (true, ColorFlag ? CombinationType.Color : CombinationType.Value);
+            return (true, ValueFlag ? CombinationType.Value : CombinationType.Color);
         }
 
         /// <summary>
         /// Проверка полей комбинации на null
         /// </summary>
         /// <param name="combination">Комбинация</param>
-        private void NullChecking(CombinationModel combination)
+        internal void NullChecking(CombinationModel combination)
         {
             if (combination is null)
             {
@@ -69,7 +68,7 @@ namespace MechanicsModel
         /// Проверка длины комбинации
         /// </summary>
         /// <param name="combination">Комбинация</param>
-        private void CombinationLengthChecking(CombinationModel combination)
+        internal void CombinationLengthChecking(CombinationModel combination)
         {
             if (combination.Cards.Count < 3)
             {
@@ -86,7 +85,7 @@ namespace MechanicsModel
         /// Проверка на количество Джокеров в комбинации
         /// </summary>
         /// <param name="combination">Комбинация</param>
-        private void JokerChecking(CombinationModel combination)
+        internal void JokerChecking(CombinationModel combination)
         {
             int jokerCount = combination.Cards.Where(x => x.IsJoker).Count();
 
@@ -100,7 +99,7 @@ namespace MechanicsModel
         /// Проврека на повторяющиеся фишки в комбинации
         /// </summary>
         /// <param name="combination">Комбинация</param>
-        private void CardsRepeatChecking(CombinationModel combination)
+        internal void CardsRepeatChecking(CombinationModel combination)
         {
             var listWithoutJokers = combination.Cards.Where(card => !card.IsJoker).ToList();
 
@@ -119,7 +118,7 @@ namespace MechanicsModel
         /// </summary>
         /// <param name="combination">Комбинация</param>
         /// <returns>Имеют ли фишки все один цвет и идут ли они в порядке возрастания значения</returns>
-        private bool CheckCombinationColorType(CombinationModel combination)
+        internal bool CheckCombinationColorType(CombinationModel combination)
         {
             var firstNonJokerindex = combination.Cards.IndexOf(combination.Cards.First(x => !x.IsJoker));
 
@@ -158,7 +157,7 @@ namespace MechanicsModel
         /// </summary>
         /// <param name="combination">Комбинация фишек</param>
         /// <returns>Имеют ли фишки одно значение и при этом все различаются по цвету</returns>
-        private bool CheckCombinationNumberType(CombinationModel combination)
+        internal bool CheckCombinationNumberType(CombinationModel combination)
         {
             if (combination.Cards.Count > 4)
                 return false;
