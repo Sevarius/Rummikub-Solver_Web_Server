@@ -93,7 +93,8 @@ namespace EmptyMVC.Tests
                 (CombinationType.Value, "j j 10y 10b"),
                 (CombinationType.Value, "j 10y 10b"),
                 (CombinationType.Value, "j 10b j 10bb"),
-                (CombinationType.Value, "j 13b 13y 13bb")
+                (CombinationType.Value, "j 13b 13y 13bb"),
+                (CombinationType.Value, "j j 3r")
             };
 
             foreach (var test in testsList)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MechanicsModel
 {
-    public class CombinationModel
+    public class CombinationModel : IEnumerable<Card>
     {
         /// <summary>
         /// Последовательность фишек
@@ -42,11 +43,20 @@ namespace MechanicsModel
         public bool ContainsCard(Card card) => Cards.Contains(card);
 
         /// <summary>
+        /// Возвращает количество повторений данной фишки в комбинации
+        /// </summary>
+        /// <param name="card">Фишка</param>
+        /// <returns>Количество повторений</returns>
+        public int CountCard(Card card) => Cards.Count(x => x.Equals(card));
+
+        /// <summary>
         /// Получение фишки из комбинации по индексу
         /// </summary>
         /// <param name="index">Индекс фишки</param>
         /// <returns>Фишка по индексу</returns>
         public Card this[int index] => this.Cards[index];
+
+        public IEnumerator<Card> GetEnumerator() => Cards.GetEnumerator();
 
         /// <summary>
         /// Строковое представление комбинации
@@ -54,12 +64,12 @@ namespace MechanicsModel
         /// <returns>Строковое представление комбинации</returns>
         public override string ToString()
         {
-            var sb = new StringBuilder("Combination:");
+            var sb = new StringBuilder("Combination: ");
 
-            foreach (var card in Cards)
+            for (var i = 0; i < Cards.Count; i++)
             {
-                sb.Append(card);
-                sb.Append(Equals(card, Cards.Last()) ? ';' : ' ');
+                sb.Append(Cards[i]);
+                sb.Append(i == Cards.Count - 1 ? "; " : " ");
             }
 
             sb.Append($"Is valid: {isValid}; Combination type: {Convert.ToString(Type)};");
@@ -90,6 +100,8 @@ namespace MechanicsModel
             this.Cards.ForEach(card => res += card.GetHashCode());
             return res;
         }
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public override bool Equals(object obj)
         {

@@ -22,7 +22,7 @@ namespace EmptyMVC.Tests
         }
 
         [Fact]
-        public void CheckAllVariations()
+        public void CheckAllVariationsTest()
         {
             var combMap = new CombinationsMap();
             var firstCombination = new List<CombinationModel>() { new CombinationModel(new List<Card>()) };
@@ -31,26 +31,47 @@ namespace EmptyMVC.Tests
         }
 
         [Fact]
-        public void GetAll3LenCombinations()
+        public void GetAll3LenCombinationsTest()
         {
             var combMap = new CombinationsMap();
             var check = new CombinationChecker();
-            var res = combMap.RemoveColorDuplicationCombinations(combMap.GetOnlyValidCombinations(combMap.GenerateAll3LengthVariations()));
+            var res = combMap.GetOnlyValidCombinations(combMap.GenerateAll3LengthVariations());
+            res = combMap.RemoveColorDuplicationCombinations(res);
+
+            // using (var file = File.OpenWrite("seva.txt"))
+            // {
+            //     using (var fileW = new StreamWriter(file))
+            //     {
+            //         fileW.WriteLine(res.Count);
+            //         foreach (CombinationModel combination in res)
+            //         {
+            //             fileW.WriteLine(combination.ToString());
+            //         }
+            //     }
+            // }
+
+            Assert.Equal(358, res.Count);
+        }
+
+        [Fact]
+        public void GetAll5LenCombinationsTest()
+        {
+            var combMap = new CombinationsMap();
+            var res = combMap.GenerateCombinations();
 
             using (var file = File.OpenWrite("seva.txt"))
             {
                 using (var fileW = new StreamWriter(file))
                 {
-                    fileW.WriteLine(res.Count);
+                    //fileW.WriteLine(res.Count);
                     foreach (CombinationModel combination in res)
                     {
-                        fileW.WriteLine(combination.ToString());
+                        fileW.WriteLine(combination.ToStringRaw());
                     }
                 }
             }
 
-            Assert.Equal(188+143, res.Count);
-
+            Assert.Equal(1517, res.Count);
         }
     }
 }
