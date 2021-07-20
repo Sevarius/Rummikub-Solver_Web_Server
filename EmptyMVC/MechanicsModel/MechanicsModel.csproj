@@ -44,6 +44,7 @@
     <Compile Include="CardModel.cs" />
     <Compile Include="CombinationChecker.cs" />
     <Compile Include="CombinationModel.cs" />
+    <Compile Include="GameModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

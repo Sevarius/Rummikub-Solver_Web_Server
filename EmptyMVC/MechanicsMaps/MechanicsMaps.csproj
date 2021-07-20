@@ -50,6 +50,10 @@
       <Project>{9a4ac7bd-b501-4905-980b-f2b5e9aba15c}</Project>
       <Name>MechanicsModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RumExceptions\RumExceptions.csproj">
+      <Project>{8b9ab72b-5409-4fef-94c5-51a5fd5199cf}</Project>
+      <Name>RumExceptions</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

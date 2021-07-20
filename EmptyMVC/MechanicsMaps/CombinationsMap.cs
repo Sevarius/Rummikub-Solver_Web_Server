@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using MechanicsModel;
+using RumExceptions;
 
 namespace MechanicsMaps
 {
@@ -13,10 +15,16 @@ namespace MechanicsMaps
         /// Словарь комбинация -> индекс комбинации
         /// </summary>
         private readonly Dictionary<CombinationModel, int> _combinationMap;
+
+        private readonly List<CombinationModel> _combinationList;
+
         /// <summary>
         /// Словарь фишка -> индекс фишки
         /// </summary>
         private readonly Dictionary<Card, int> _cardMap;
+
+        private readonly List<Card> _cardList;
+
         /// <summary>
         /// массив [индекс комбинации, индекс фишки] -> количество фишек в комбинации
         /// </summary>
@@ -30,7 +38,9 @@ namespace MechanicsMaps
         public CombinationsMap()
         {
             _cardMap = new Dictionary<Card, int>();
+            _cardList = new List<Card>();
             _combinationMap = new Dictionary<CombinationModel, int>();
+            _combinationList = new List<CombinationModel>();
         }
 
         public void GenerateMaps()
@@ -42,11 +52,13 @@ namespace MechanicsMaps
 
             foreach (var pair in Card.AllPossibleCards().Select((card, i) => new {Card = card, Index = i}))
             {
+                _cardList.Add(pair.Card);
                 _cardMap.Add(pair.Card, pair.Index);
             }
 
             foreach (var pair in GenerateCombinations().Select((model, i) => new {Comb = model, Index = i}))
             {
+                _combinationList.Add(pair.Comb);
                 _combinationMap.Add(pair.Comb, pair.Index);
             }
 
@@ -57,11 +69,107 @@ namespace MechanicsMaps
                 foreach (var card in model)
                 {
                     _combinationCardMap[_combinationMap[model], _cardMap[card]] = model.CountCard(card);
-                } 
+                }
             }
 
             Generated = true;
         }
+
+        public int GetCardIndex(Card card)
+        {
+            if (!Generated)
+            {
+                throw new RumException(ExceptionType.CombinationMapError01, "Модель не былв сгенерирована");
+            }
+
+            return _cardMap[card];
+        }
+
+        public int GetCombinationIndex(CombinationModel comb)
+        {
+            if (!Generated)
+            {
+                throw new RumException(ExceptionType.CombinationMapError01, "Модель не былв сгенерирована");
+            }
+
+            return _combinationMap[comb];
+        }
+
+        public List<double> GetCoefficientsForCard(Card card)
+        {
+            if (!Generated)
+            {
+                throw new RumException(ExceptionType.CombinationMapError01, "Модель не былв сгенерирована");
+            }
+            var result = new List<double>();
+            int cardIndex = _cardMap[card];
+            for (int i = 0; i < _combinationMap.Count; i++)
+            {
+                result.Add(_combinationCardMap[i, cardIndex]);
+            }
+
+            return result;
+        }
+
+        public List<double> GetCoefficientsForCard(int cardIndex)
+        {
+            if (!Generated)
+            {
+                throw new RumException(ExceptionType.CombinationMapError01, "Модель не былв сгенерирована");
+            }
+            var result = new List<double>();
+            for (int i = 0; i < _combinationMap.Count; i++)
+            {
+                result.Add(_combinationCardMap[i, cardIndex]);
+            }
+
+            return result;
+        }
+
+        public double this[CombinationModel combinationModel, Card card]
+        {
+            get
+            {
+                if (!Generated)
+                {
+                    throw new RumException(ExceptionType.CombinationMapError01, "Модель не былв сгенерирована");
+                }
+                int cardIndex = _cardMap[card];
+                int modelIndex = _combinationMap[combinationModel];
+
+                return _combinationCardMap[modelIndex, cardIndex];
+            }
+        }
+
+        public IEnumerable<Card> Cards
+        {
+            get
+            {
+                if (!Generated)
+                {
+                    throw new RumException(ExceptionType.CombinationMapError01, "Модель не былв сгенерирована");
+                }
+
+                return _cardList;
+            }
+        }
+
+        public IEnumerable<CombinationModel> Combinations
+        {
+            get
+            {
+                if (!Generated)
+                {
+                    throw new RumException(ExceptionType.CombinationMapError01, "Модель не былв сгенерирована");
+                }
+
+                return _combinationList;
+            }
+        }
+
+        public int CombinationCount => _combinationMap.Count;
+
+        public int CardCount => _cardMap.Count;
 
         /// <summary>
         /// Генерирует список всех валидных комбинаций длины 3, 4 и 5

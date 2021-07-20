@@ -35,5 +35,8 @@ namespace RumExceptions
         [Description("В комбинации имеются повторяющиеся фишки")]
         CombinationCheckerError04,
 
+        [Description("Модель соответствий не была сгенерирована")]
+        CombinationMapError01,
+
     }
 }

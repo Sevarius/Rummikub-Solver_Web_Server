@@ -138,7 +138,7 @@ namespace MechanicsModel
         /// Пока что не известно
         /// </summary>
         Unknown = 0,
-        
+
         /// <summary>
         /// По значению
         /// </summary>
