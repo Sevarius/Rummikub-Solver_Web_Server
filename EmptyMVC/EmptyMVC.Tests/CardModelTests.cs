@@ -99,7 +99,7 @@ namespace EmptyMVC.Tests
 
             foreach (var test in testsList)
             {
-                Add(test.Item1, converter.stringToCombination(test.Item2, CombinationStringFormat.Short));
+                Add(test.Item1, converter.StringToCombination(test.Item2, CombinationStringFormat.Short));
             }
 
             ;
@@ -133,7 +133,7 @@ namespace EmptyMVC.Tests
 
             foreach (var test in testsList)
             {
-                Add(converter.stringToCombination(test, CombinationStringFormat.Short));
+                Add(converter.StringToCombination(test, CombinationStringFormat.Short));
             }
         }
     }

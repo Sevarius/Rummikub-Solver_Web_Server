@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Linq.Expressions;
+﻿using System;
+using System.Collections.Generic;
 using COIN;
-using MechanicsMaps;
 using MechanicsModel;
 using Sonnet;
 using Constraint = Sonnet.Constraint;
@@ -21,18 +19,7 @@ namespace MathModel
             _map = map;
         }
 
-        public void Solve()
-        {
-            var model = ConstructModel();
-
-            Solver solver = new Solver(model, typeof(OsiCbcSolverInterface));
-
-            solver.Solve();
-            
-            
-        }
-
-        public Model ConstructModel()
+        public (List<CombinationModel>, List<Card>, double) Solve()
         {
             var model = new Model("Rummikub model");
             (var combinationVariables, var cardVariables) = ConstructVariables();
@@ -46,7 +33,45 @@ namespace MathModel
             model.ObjectiveSense = ObjectiveSense.Maximise;
             model.Objective = objective;
 
-            return model;
+            Solver solver = new Solver(model, typeof(OsiCbcSolverInterface));
+
+            solver.Solve();
+
+            //solver.Export("seva.sonnet");
+
+            if (solver.IsProvenOptimal)
+            {
+                var combinationsOnTable = new List<CombinationModel>();
+                var cardsToPutFromHand = new List<Card>();
+
+                for (var i = 0; i < combinationVariables.Count; i++)
+                {
+                    if (Math.Abs(combinationVariables[i].Value) > 0.01)
+                    {
+                        var combinationToAdd = _map.GetCombinationModelByIndex(i);
+                        combinationsOnTable.Add(combinationToAdd);
+                        if (Math.Abs(combinationVariables[i].Value - 2) < 0.01)
+                            combinationsOnTable.Add(combinationToAdd);
+                    }
+                }
+
+                for (var i = 0; i < cardVariables.Count; i++)
+                {
+                    if (Math.Abs(cardVariables[i].Value) > 0.01)
+                    {
+                        var cardToAdd = _map.GetCardByIndex(i);
+                        cardsToPutFromHand.Add(cardToAdd);
+                        if (Math.Abs(combinationVariables[i].Value - 2) < 0.01)
+                            cardsToPutFromHand.Add(cardToAdd);
+                    }
+                }
+
+                return (combinationsOnTable, cardsToPutFromHand, model.Objective.Value);
+            }
+            else
+            {
+                return default;
+            }
         }
 
         public (List<Variable>, List<Variable>) ConstructVariables()

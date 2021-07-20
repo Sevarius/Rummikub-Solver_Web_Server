@@ -55,10 +55,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MechanicsMaps\MechanicsMaps.csproj">
-      <Project>{9ccbbb5c-fb48-4e12-bad7-c98548fb3ed6}</Project>
-      <Name>MechanicsMaps</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MechanicsModel\MechanicsModel.csproj">
       <Project>{9a4ac7bd-b501-4905-980b-f2b5e9aba15c}</Project>
       <Name>MechanicsModel</Name>

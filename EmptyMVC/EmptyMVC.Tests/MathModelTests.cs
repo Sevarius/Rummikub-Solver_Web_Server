@@ -4,7 +4,7 @@ using COIN;
 using Xunit;
 
 using MathModel;
-using MechanicsMaps;
+using MechanicsModel;
 using Sonnet;
 using Xunit.Abstractions;
 
@@ -19,7 +19,57 @@ namespace EmptyMVC.Tests
         {
             _testOutputHelper = testOutputHelper;
             _map = new CombinationsMap();
+            _testOutputHelper.WriteLine("Началась генерация модели");
+            var start = DateTime.Now;
             _map.GenerateMaps();
+            var spendTime = DateTime.Now - start;
+            _testOutputHelper.WriteLine($"Модель была сгенерирована за {spendTime.Seconds} секунд");
+        }
+
+        [Fact]
+        public void FirstRealTest()
+        {
+            var game = new GameModel
+            {
+                Hand = new List<Card>
+                {
+                    new Card(CardColor.Blue, 4),
+                    new Card(CardColor.Blue, 6)
+                },
+                Table = new List<CombinationModel>
+                {
+                    new CombinationModel(new List<Card>
+                    {
+                        new Card(CardColor.Blue, 1),
+                        new Card(CardColor.Blue, 2),
+                        new Card(CardColor.Blue, 3),
+                        new Card(CardColor.Blue, 4),
+                        new Card(CardColor.Blue, 5)
+                    })
+                    {
+                        isValid = true,
+                        Type = CombinationType.Color
+                    },
+                }
+            };
+
+            var model = new MathProblem(game, _map);
+            _testOutputHelper.WriteLine("Решение задачи");
+            (var combinationsOnTable, var cardsToPutFromHand, var objValue) = model.Solve();
+            if (combinationsOnTable is null || cardsToPutFromHand is null)
+            {
+                _testOutputHelper.WriteLine("Задача не была решена корректно");
+            }
+            else
+            {
+                _testOutputHelper.WriteLine("Задача была решена корректно");
+                _testOutputHelper.WriteLine($"Значение целевой функции: {objValue}");
+                _testOutputHelper.WriteLine($"{combinationsOnTable.Count} комбинаций на столе\n{cardsToPutFromHand.Count} фишек надо выложить с руки");
+                _testOutputHelper.WriteLine("Комбинации:");
+                combinationsOnTable.ForEach(c => _testOutputHelper.WriteLine(c.ToStringRaw()));
+                _testOutputHelper.WriteLine("Фишки:");
+                cardsToPutFromHand.ForEach(c => _testOutputHelper.WriteLine(c.ToString()));
+            }
         }
 
         [Fact(Skip = "skip")]

@@ -44,8 +44,10 @@
     <Compile Include="CardModel.cs" />
     <Compile Include="CombinationChecker.cs" />
     <Compile Include="CombinationModel.cs" />
+    <Compile Include="CombinationsMap.cs" />
     <Compile Include="GameModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringToCombinationConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RumExceptions\RumExceptions.csproj">

@@ -9,7 +9,7 @@ namespace MechanicsModel
 
         public List<Card> Hand { get; set; }
 
-        public bool IsValid;
+        public bool? IsValid = null;
 
         public int CountCardInHand(Card card)
         {
@@ -20,5 +20,5 @@ namespace MechanicsModel
         {
             return Table.Select(x => x.CountCard(card)).Sum();
         }
-}
+    }
 }

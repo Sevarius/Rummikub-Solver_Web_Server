@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using MechanicsModel;
 
-namespace EmptyMVC.Tests
+namespace MechanicsModel
 {
-    public class StringToCombinationConverter
+    public sealed class StringToCombinationConverter
     {
-        public CombinationModel stringToCombination(string combStr, CombinationStringFormat format)
+        public CombinationModel StringToCombination(string combStr, CombinationStringFormat format)
         {
             var cardStrs = combStr.Trim(' ', '\n', '\r', '\t').Split(' ');
-            var cards = cardStrs.Select(card => stringToCard(card, format)).ToList();
+            var cards = cardStrs.Select(card => StringToCard(card, format)).ToList();
             return new CombinationModel(cards)
             {
                 Type = CombinationType.Unknown,
@@ -20,7 +20,7 @@ namespace EmptyMVC.Tests
             };
         }
 
-        public Card stringToCard(string cardStr, CombinationStringFormat format)
+        public Card StringToCard(string cardStr, CombinationStringFormat format)
         {
             var numberStr = "";
             var colorStr = "";
@@ -41,13 +41,13 @@ namespace EmptyMVC.Tests
                 colorStr = split[1];
             }
 
-            var color = stringToColor(colorStr);
-            var number = stringToNumber(numberStr);
+            var color = StringToColor(colorStr);
+            var number = StringToNumber(numberStr);
 
             return new Card(color, number);
         }
 
-        public CardColor stringToColor(string colorStr)
+        public CardColor StringToColor(string colorStr)
         {
             switch (colorStr)
             {
@@ -72,7 +72,7 @@ namespace EmptyMVC.Tests
             }
         }
 
-        public int stringToNumber(string numberStr)
+        public int StringToNumber(string numberStr)
         {
             if (numberStr == string.Empty)
                 return 0;

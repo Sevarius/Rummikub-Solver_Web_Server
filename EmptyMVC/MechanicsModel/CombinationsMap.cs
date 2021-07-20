@@ -4,7 +4,7 @@ using System.Runtime.Remoting.Messaging;
 using MechanicsModel;
 using RumExceptions;
 
-namespace MechanicsMaps
+namespace MechanicsModel
 {
     /// <summary>
     /// Модель соответствия фишек и доступных комбинаций
@@ -16,6 +16,9 @@ namespace MechanicsMaps
         /// </summary>
         private readonly Dictionary<CombinationModel, int> _combinationMap;
 
+        /// <summary>
+        /// Список индекс -> кобмбинация
+        /// </summary>
         private readonly List<CombinationModel> _combinationList;
 
         /// <summary>
@@ -23,6 +26,9 @@ namespace MechanicsMaps
         /// </summary>
         private readonly Dictionary<Card, int> _cardMap;
 
+        /// <summary>
+        /// Список индекс -> фишка
+        /// </summary>
         private readonly List<Card> _cardList;
 
         /// <summary>
@@ -35,6 +41,9 @@ namespace MechanicsMaps
         /// </summary>
         public bool Generated { get; private set; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
         public CombinationsMap()
         {
             _cardMap = new Dictionary<Card, int>();
@@ -43,6 +52,9 @@ namespace MechanicsMaps
             _combinationList = new List<CombinationModel>();
         }
 
+        /// <summary>
+        /// Генерирует словари соответсвия фишек, комбинаций и индексов
+        /// </summary>
         public void GenerateMaps()
         {
             if (Generated)
@@ -75,6 +87,12 @@ namespace MechanicsMaps
             Generated = true;
         }
 
+        /// <summary>
+        /// Получить индекс фишки
+        /// </summary>
+        /// <param name="card">Фишка</param>
+        /// <returns>int -> индекс фишки</returns>
+        /// <exception cref="RumException">Исключение, если словари не были сформированы</exception>
         public int GetCardIndex(Card card)
         {
             if (!Generated)
@@ -85,16 +103,12 @@ namespace MechanicsMaps
             return _cardMap[card];
         }
 
-        public int GetCombinationIndex(CombinationModel comb)
-        {
-            if (!Generated)
-            {
-                throw new RumException(ExceptionType.CombinationMapError01, "Модель не былв сгенерирована");
-            }
-
-            return _combinationMap[comb];
-        }
-
+        /// <summary>
+        /// Получить список коэффициентов Vj для фишки, где j - индекс комбинации, а Vj - Сколько раз данная фишка встречается в комбинации j
+        /// </summary>
+        /// <param name="card">Фишка</param>
+        /// <returns>List_double -> список коэффициентов для данной фишка</returns>
+        /// <exception cref="RumException">Исключение, если словари не были сформированы</exception>
         public List<double> GetCoefficientsForCard(Card card)
         {
             if (!Generated)
@@ -111,36 +125,42 @@ namespace MechanicsMaps
             return result;
         }
 
-        public List<double> GetCoefficientsForCard(int cardIndex)
+        /// <summary>
+        /// Получить комбинацию по её индексу
+        /// </summary>
+        /// <param name="combinationIndex">Индекс комбинации</param>
+        /// <returns>CombinationModel -> комбинация</returns>
+        /// <exception cref="RumException">Исключение, если словари не были сформированы</exception>
+        public CombinationModel GetCombinationModelByIndex(int combinationIndex)
+        {
+            if (!Generated)
+            {
+                throw new RumException(ExceptionType.CombinationMapError01, "Модель не была сгенерирована");
+            }
+
+            return _combinationList[combinationIndex];
+        }
+
+        /// <summary>
+        /// Получить фишку по индексу
+        /// </summary>
+        /// <param name="cardIndex">Индекс фишки</param>
+        /// <returns>Card -> фишка</returns>
+        /// <exception cref="RumException">Исключение, если словари не были сформированы</exception>
+        public Card GetCardByIndex(int cardIndex)
         {
             if (!Generated)
             {
                 throw new RumException(ExceptionType.CombinationMapError01, "Модель не былв сгенерирована");
             }
-            var result = new List<double>();
-            for (int i = 0; i < _combinationMap.Count; i++)
-            {
-                result.Add(_combinationCardMap[i, cardIndex]);
-            }
 
-            return result;
+            return _cardList[cardIndex];
         }
 
-        public double this[CombinationModel combinationModel, Card card]
-        {
-            get
-            {
-                if (!Generated)
-                {
-                    throw new RumException(ExceptionType.CombinationMapError01, "Модель не былв сгенерирована");
-                }
-                int cardIndex = _cardMap[card];
-                int modelIndex = _combinationMap[combinationModel];
-
-                return _combinationCardMap[modelIndex, cardIndex];
-            }
-        }
-
+        /// <summary>
+        /// IEnumerable фишек
+        /// </summary>
+        /// <exception cref="RumException">Исключение, если словари не были сформированы</exception>
         public IEnumerable<Card> Cards
         {
             get
@@ -154,6 +174,10 @@ namespace MechanicsMaps
             }
         }
 
+        /// <summary>
+        /// IEnumerable комибнаций фишек
+        /// </summary>
+        /// <exception cref="RumException">Исключение, если словари не были сформированы</exception>
         public IEnumerable<CombinationModel> Combinations
         {
             get
@@ -167,8 +191,14 @@ namespace MechanicsMaps
             }
         }
 
+        /// <summary>
+        /// Количество комбинаций
+        /// </summary>
         public int CombinationCount => _combinationMap.Count;
 
+        /// <summary>
+        /// Количество фишек
+        /// </summary>
         public int CardCount => _cardMap.Count;
 
         /// <summary>

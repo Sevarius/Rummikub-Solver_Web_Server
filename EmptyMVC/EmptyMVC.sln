@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MechanicsModel", "Mechanics
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RumExceptions", "RumExceptions\RumExceptions.csproj", "{8B9AB72B-5409-4FEF-94C5-51A5FD5199CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MechanicsMaps", "MechanicsMaps\MechanicsMaps.csproj", "{9CCBBB5C-FB48-4E12-BAD7-C98548FB3ED6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleSolver", "ConsoleSolver\ConsoleSolver.csproj", "{4238BF1D-329F-4DB3-9A02-387C2A76BF78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{8B9AB72B-5409-4FEF-94C5-51A5FD5199CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B9AB72B-5409-4FEF-94C5-51A5FD5199CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B9AB72B-5409-4FEF-94C5-51A5FD5199CF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9CCBBB5C-FB48-4E12-BAD7-C98548FB3ED6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9CCBBB5C-FB48-4E12-BAD7-C98548FB3ED6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9CCBBB5C-FB48-4E12-BAD7-C98548FB3ED6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9CCBBB5C-FB48-4E12-BAD7-C98548FB3ED6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4238BF1D-329F-4DB3-9A02-387C2A76BF78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4238BF1D-329F-4DB3-9A02-387C2A76BF78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4238BF1D-329F-4DB3-9A02-387C2A76BF78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4238BF1D-329F-4DB3-9A02-387C2A76BF78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
