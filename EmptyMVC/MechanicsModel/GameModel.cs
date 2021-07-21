@@ -9,7 +9,7 @@ namespace MechanicsModel
 
         public List<Card> Hand { get; set; }
 
-        public bool? IsValid = null;
+        public bool IsValid;
 
         public int CountCardInHand(Card card)
         {

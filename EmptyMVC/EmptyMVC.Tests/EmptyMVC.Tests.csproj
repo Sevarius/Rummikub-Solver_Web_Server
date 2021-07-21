@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="CombinationCheckerTests.cs" />
     <Compile Include="CombinationModelTests.cs" />
+    <Compile Include="GameCheckerTest.cs" />
     <Compile Include="MathModelTests.cs" />
     <Compile Include="CardModelTests.cs" />
     <Compile Include="MechanicsMapsTest.cs" />

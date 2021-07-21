@@ -54,7 +54,12 @@ namespace MechanicsModel
         /// </summary>
         /// <param name="index">Индекс фишки</param>
         /// <returns>Фишка по индексу</returns>
-        public Card this[int index] => this.Cards[index];
+        public Card this[int index] => Cards[index];
+
+        /// <summary>
+        /// Длина комбинации
+        /// </summary>
+        public int Length => Cards.Count;
 
         public IEnumerator<Card> GetEnumerator() => Cards.GetEnumerator();
 
@@ -97,7 +102,7 @@ namespace MechanicsModel
         public override int GetHashCode()
         {
             int res = 0;
-            this.Cards.ForEach(card => res += card.GetHashCode());
+            Cards.ForEach(card => res += card.GetHashCode());
             return res;
         }
 

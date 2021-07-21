@@ -54,7 +54,7 @@ namespace ConsoleSolver
 
                 var model = new MathProblem(new GameModel(){Hand = hand, Table = tableCombinations}, map);
                 Console.WriteLine("Решение задачи");
-                
+
                 (var combinationsOnTable, var cardsToPutFromHand, var objValue) = model.Solve();
                 if (combinationsOnTable is null || cardsToPutFromHand is null)
                 {

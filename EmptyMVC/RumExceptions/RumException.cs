@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace RumExceptions
 {
-    public class RumException : ApplicationException
+    public sealed class RumException : ApplicationException
     {
         private ExceptionType _exType;
 
-        public RumException(ExceptionType exceptionType, string message) : base(message)
+        public RumException(ExceptionType exceptionType, string message, Exception innerException = null) : base(message, innerException)
         {
             _exType = exceptionType;
         }
@@ -22,6 +22,9 @@ namespace RumExceptions
     {
         [Description("Ошибка формирования фишки")]
         CardError01 = 0,
+
+        [Description("Необработанная ошибка проверки комбинации")]
+        CombinationCheckerError00,
 
         [Description("Ошибка подачи Null'евой комбинации в проверку комбинаций")]
         CombinationCheckerError01,
