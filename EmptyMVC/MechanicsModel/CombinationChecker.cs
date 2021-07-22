@@ -34,12 +34,6 @@ namespace MechanicsModel
                 return (false, CombinationType.Unknown);
             }
 
-            // Если это комбинация по значению, то сортируем в ней фишки
-            if (ValueFlag)
-            {
-                combination.Cards.Sort();
-            }
-
             return (true, ValueFlag ? CombinationType.Value : CombinationType.Color);
         }
 
