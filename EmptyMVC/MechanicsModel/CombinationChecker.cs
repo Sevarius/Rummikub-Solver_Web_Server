@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using RumExceptions;
 
 namespace MechanicsModel
@@ -34,7 +30,15 @@ namespace MechanicsModel
             var ValueFlag = CheckCombinationNumberType(combination);
 
             if (!ColorFlag && !ValueFlag)
+            {
                 return (false, CombinationType.Unknown);
+            }
+
+            // Если это комбинация по значению, то сортируем в ней фишки
+            if (ValueFlag)
+            {
+                combination.Cards.Sort();
+            }
 
             return (true, ValueFlag ? CombinationType.Value : CombinationType.Color);
         }

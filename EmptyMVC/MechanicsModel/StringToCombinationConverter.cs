@@ -1,18 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MechanicsModel;
 
 namespace MechanicsModel
 {
+    /// <summary>
+    /// Класс конвертации строкового представления комбинаций фишек в объекты комбинаций
+    /// </summary>
     public sealed class StringToCombinationConverter
     {
-        public CombinationModel StringToCombination(string combStr, CombinationStringFormat format)
+        /// <summary>
+        /// Формат преобразования строк
+        /// </summary>
+        private readonly CombinationStringFormat _format;
+
+        /// <summary>
+        /// Конструктор конвертора
+        /// </summary>
+        /// <param name="format">Формат строкового представления фишек представления </param>
+        public StringToCombinationConverter(CombinationStringFormat format)
+        {
+            _format = format;
+        }
+
+        /// <summary>
+        /// Преобразовывает строковок представление комбинации в объект комбинации
+        /// </summary>
+        /// <param name="combStr">Строковое представление комбинации</param>
+        /// <returns>Объект комбинации</returns>
+        public CombinationModel StringToCombination(string combStr)
         {
             var cardStrs = combStr.Trim(' ', '\n', '\r', '\t').Split(' ');
-            var cards = cardStrs.Select(card => StringToCard(card, format)).ToList();
+            var cards = cardStrs.Select(StringToCard).ToList();
             return new CombinationModel(cards)
             {
                 Type = CombinationType.Unknown,
@@ -20,11 +38,16 @@ namespace MechanicsModel
             };
         }
 
-        public Card StringToCard(string cardStr, CombinationStringFormat format)
+        /// <summary>
+        /// Преобразовывает строковок представление фишки в объект фишки
+        /// </summary>
+        /// <param name="cardStr">Строковое представление фишки</param>
+        /// <returns>Объект фишки</returns>
+        public Card StringToCard(string cardStr)
         {
             var numberStr = "";
             var colorStr = "";
-            if (format == CombinationStringFormat.Short)
+            if (_format == CombinationStringFormat.Short)
             {
                 foreach (char c in cardStr)
                 {
@@ -47,7 +70,13 @@ namespace MechanicsModel
             return new Card(color, number);
         }
 
-        public CardColor StringToColor(string colorStr)
+        /// <summary>
+        /// Преобразовывает строковое представление цвета фишки в цвет
+        /// </summary>
+        /// <param name="colorStr">Строковое представление цвета фишки</param>
+        /// <returns>Цвет</returns>
+        /// <exception cref="InvalidCastException">Кидаетс, если была подана неверная строка</exception>
+        private CardColor StringToColor(string colorStr)
         {
             switch (colorStr)
             {
@@ -72,7 +101,12 @@ namespace MechanicsModel
             }
         }
 
-        public int StringToNumber(string numberStr)
+        /// <summary>
+        /// Преобразовывает строковое представление целого числа в число
+        /// </summary>
+        /// <param name="numberStr">Строковое представление числа</param>
+        /// <returns>Число</returns>
+        private int StringToNumber(string numberStr)
         {
             if (numberStr == string.Empty)
                 return 0;
@@ -81,6 +115,9 @@ namespace MechanicsModel
         }
     }
 
+    /// <summary>
+    /// Формат строкового представления комбинации фишек
+    /// </summary>
     public enum CombinationStringFormat
     {
         /// <summary>

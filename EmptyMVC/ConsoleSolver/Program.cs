@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Channels;
 using MathModel;
 using MechanicsModel;
 
@@ -12,7 +11,7 @@ namespace ConsoleSolver
         static void Main(string[] args)
         {
             var map = new CombinationsMap();
-            var converter = new StringToCombinationConverter();
+            var converter = new StringToCombinationConverter(CombinationStringFormat.Short);
             Console.WriteLine("Начало генерации модели");
             var start = DateTime.Now;
             map.GenerateMaps();
@@ -31,7 +30,7 @@ namespace ConsoleSolver
                         exitFlag = true;
                         break;
                     }
-                    var currentCombination = converter.StringToCombination(consoleString, CombinationStringFormat.Short);
+                    var currentCombination = converter.StringToCombination(consoleString);
                     tableCombinations.Add(currentCombination);
                     consoleString = Console.ReadLine();
                 }
@@ -50,7 +49,7 @@ namespace ConsoleSolver
 
                 var handCards = consoleString.Split(" ").ToList();
                 var hand = new List<Card>(handCards.Count);
-                handCards.ForEach(c => hand.Add(converter.StringToCard(c, CombinationStringFormat.Short)));
+                handCards.ForEach(c => hand.Add(converter.StringToCard(c)));
 
                 var model = new MathProblem(new GameModel(){Hand = hand, Table = tableCombinations}, map);
                 Console.WriteLine("Решение задачи");
@@ -71,7 +70,7 @@ namespace ConsoleSolver
                     cardsToPutFromHand.ForEach(c => Console.WriteLine(c.ToString()));
                 }
 
-                Console.WriteLine("\n\n");
+                Console.WriteLine("\n");
             }
 
             Console.WriteLine("Спасибо за использование программой");

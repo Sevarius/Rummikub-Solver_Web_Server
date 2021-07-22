@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using MechanicsModel;
 using Xunit;
@@ -8,7 +6,7 @@ using Xunit.Sdk;
 
 namespace EmptyMVC.Tests
 {
-    public class CardModelTests
+    public sealed class CardModelTests
     {
         [Theory]
         [ClassData(typeof(GoodCombinations))]
@@ -34,7 +32,7 @@ namespace EmptyMVC.Tests
         public void CheckBadCombinations(CombinationModel combination)
         {
             var checker = new CombinationChecker();
-            var res = true;
+            bool res;
             var type = CombinationType.Unknown;
 
             try
@@ -73,7 +71,7 @@ namespace EmptyMVC.Tests
     {
         public GoodCombinations()
         {
-            var converter = new StringToCombinationConverter();
+            var converter = new StringToCombinationConverter(CombinationStringFormat.Short);
 
             var testsList = new List<(CombinationType, string)>()
             {
@@ -99,18 +97,18 @@ namespace EmptyMVC.Tests
 
             foreach (var test in testsList)
             {
-                Add(test.Item1, converter.StringToCombination(test.Item2, CombinationStringFormat.Short));
+                Add(test.Item1, converter.StringToCombination(test.Item2));
             }
 
             ;
         }
     }
 
-    public class BadCombinations : TheoryData<CombinationModel>
+    public sealed class BadCombinations : TheoryData<CombinationModel>
     {
         public BadCombinations()
         {
-            var converter = new StringToCombinationConverter();
+            var converter = new StringToCombinationConverter(CombinationStringFormat.Short);
 
             var testsList = new List<string>()
             {
@@ -133,7 +131,7 @@ namespace EmptyMVC.Tests
 
             foreach (var test in testsList)
             {
-                Add(converter.StringToCombination(test, CombinationStringFormat.Short));
+                Add(converter.StringToCombination(test));
             }
         }
     }

@@ -8,6 +8,9 @@ using Expression = Sonnet.Expression;
 
 namespace MathModel
 {
+    /// <summary>
+    /// Класс математической постановки задачи
+    /// </summary>
     public class MathProblem
     {
         private readonly GameModel _game;
