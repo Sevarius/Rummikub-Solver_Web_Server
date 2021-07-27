@@ -26,7 +26,7 @@ namespace MechanicsModel
         /// <param name="game">Объект игровой ситации</param>
         /// <returns>Кортеж (валидна ли игровая ситация, список всех невалидных комбинаций фишек, список всех невалидных фишек)</returns>
         /// <exception cref="RumException">Кидает исключение, если возникает невозможная игровая ситуация</exception>
-        public (bool validationResult, List<CombinationModel> badCombinations, List<Card> badCards) ValidateGame(GameModel game)
+        public (bool validationResult, List<CombinationModel> badCombinations, List<CardModel> badCards) ValidateGame(GameModel game)
         {
             if (!game.Hand.Any())
             {
@@ -145,14 +145,14 @@ namespace MechanicsModel
         /// <param name="allCombinations">Все комбинации на столе</param>
         /// <param name="handCards">Фишки на руке</param>
         /// <returns>Список фишек, которые встречаются больше 2 раз в игровой ситуации</returns>
-        private List<Card> ValidateCards(List<CombinationModel> allCombinations, List<Card> handCards)
+        private List<CardModel> ValidateCards(List<CombinationModel> allCombinations, List<CardModel> handCards)
         {
-            var badCards = new List<Card>();
-            var listOfAllCards = new List<Card>();
+            var badCards = new List<CardModel>();
+            var listOfAllCards = new List<CardModel>();
             listOfAllCards.AddRange(handCards);
             allCombinations.ForEach(cmb => listOfAllCards.AddRange(cmb.Cards));
-            var setOfAllCards = new HashSet<Card>(listOfAllCards);
-            foreach (Card card in setOfAllCards)
+            var setOfAllCards = new HashSet<CardModel>(listOfAllCards);
+            foreach (CardModel card in setOfAllCards)
             {
                 if (listOfAllCards.Count(c => c.Equals(card)) > 2)
                 {

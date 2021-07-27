@@ -50,12 +50,12 @@ namespace EmptyMVC.Tests
         [Fact]
         public void CardSortTest()
         {
-            var listToSort = new List<Card>()
+            var listToSort = new List<CardModel>()
             {
-                new Card(CardColor.Red, 1),
-                new Card(CardColor.Joker, 0),
-                new Card(CardColor.Blue, 1),
-                new Card(CardColor.Joker, 0)
+                new CardModel(CardColor.Red, 1),
+                new CardModel(CardColor.Joker, 0),
+                new CardModel(CardColor.Blue, 1),
+                new CardModel(CardColor.Joker, 0)
             };
 
             listToSort.Sort();

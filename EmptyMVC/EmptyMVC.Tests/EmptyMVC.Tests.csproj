@@ -39,12 +39,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005">
+      <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.2.2.4\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.2.2.4\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Sonnet, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\AdditionalPackages\Sonnet.dll</HintPath>
@@ -81,6 +89,8 @@
     <Compile Include="CombinationCheckerTests.cs" />
     <Compile Include="CombinationModelTests.cs" />
     <Compile Include="GameCheckerTest.cs" />
+    <Compile Include="JsonTest.cs" />
+    <Compile Include="MapperTest.cs" />
     <Compile Include="MathModelTests.cs" />
     <Compile Include="CardModelTests.cs" />
     <Compile Include="MechanicsMapsTest.cs" />
@@ -90,9 +100,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DTOModel\DTOModel.csproj">
+      <Project>{b461641a-3e77-42a3-8143-73e876bf7a88}</Project>
+      <Name>DTOModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EmptyMVC\EmptyMVC.csproj">
       <Project>{6120C62B-F1A5-45D1-93F3-76641328762A}</Project>
       <Name>EmptyMVC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapper\Mapper.csproj">
+      <Project>{49d1311a-ac35-448c-bc01-e9574d163e8b}</Project>
+      <Name>Mapper</Name>
     </ProjectReference>
     <ProjectReference Include="..\MechanicsModel\MechanicsModel.csproj">
       <Project>{9a4ac7bd-b501-4905-980b-f2b5e9aba15c}</Project>

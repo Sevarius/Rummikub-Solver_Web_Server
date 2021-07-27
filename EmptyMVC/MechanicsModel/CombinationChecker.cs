@@ -134,7 +134,7 @@ namespace MechanicsModel
                     if (prevCard.Number == 13)
                         return false;
 
-                    prevCard = new Card(prevCard.Color, prevCard.Number + 1);
+                    prevCard = new CardModel(prevCard.Color, prevCard.Number + 1);
                 }
                 else
                 {

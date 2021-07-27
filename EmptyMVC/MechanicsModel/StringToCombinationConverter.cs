@@ -43,7 +43,7 @@ namespace MechanicsModel
         /// </summary>
         /// <param name="cardStr">Строковое представление фишки</param>
         /// <returns>Объект фишки</returns>
-        public Card StringToCard(string cardStr)
+        public CardModel StringToCard(string cardStr)
         {
             var numberStr = "";
             var colorStr = "";
@@ -67,7 +67,7 @@ namespace MechanicsModel
             var color = StringToColor(colorStr);
             var number = StringToNumber(numberStr);
 
-            return new Card(color, number);
+            return new CardModel(color, number);
         }
 
         /// <summary>

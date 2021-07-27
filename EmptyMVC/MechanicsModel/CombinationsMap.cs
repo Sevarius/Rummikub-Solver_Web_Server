@@ -22,12 +22,12 @@ namespace MechanicsModel
         /// <summary>
         /// Словарь фишка -> индекс фишки
         /// </summary>
-        private readonly Dictionary<Card, int> _cardMap;
+        private readonly Dictionary<CardModel, int> _cardMap;
 
         /// <summary>
         /// Список индекс -> фишка
         /// </summary>
-        private readonly List<Card> _cardList;
+        private readonly List<CardModel> _cardList;
 
         /// <summary>
         /// массив [индекс комбинации, индекс фишки] -> количество фишек в комбинации
@@ -44,8 +44,8 @@ namespace MechanicsModel
         /// </summary>
         public CombinationsMap()
         {
-            _cardMap = new Dictionary<Card, int>();
-            _cardList = new List<Card>();
+            _cardMap = new Dictionary<CardModel, int>();
+            _cardList = new List<CardModel>();
             _combinationMap = new Dictionary<CombinationModel, int>();
             _combinationList = new List<CombinationModel>();
         }
@@ -60,7 +60,7 @@ namespace MechanicsModel
                 return;
             }
 
-            foreach (var pair in Card.AllPossibleCards().Select((card, i) => new {Card = card, Index = i}))
+            foreach (var pair in CardModel.AllPossibleCards().Select((card, i) => new {Card = card, Index = i}))
             {
                 _cardList.Add(pair.Card);
                 _cardMap.Add(pair.Card, pair.Index);
@@ -88,33 +88,33 @@ namespace MechanicsModel
         /// <summary>
         /// Получить индекс фишки
         /// </summary>
-        /// <param name="card">Фишка</param>
+        /// <param name="cardModel">Фишка</param>
         /// <returns>int -> индекс фишки</returns>
         /// <exception cref="RumException">Исключение, если словари не были сформированы</exception>
-        public int GetCardIndex(Card card)
+        public int GetCardIndex(CardModel cardModel)
         {
             if (!Generated)
             {
                 throw new RumException(ExceptionType.CombinationMapError01, "Модель не былв сгенерирована");
             }
 
-            return _cardMap[card];
+            return _cardMap[cardModel];
         }
 
         /// <summary>
         /// Получить список коэффициентов Vj для фишки, где j - индекс комбинации, а Vj - Сколько раз данная фишка встречается в комбинации j
         /// </summary>
-        /// <param name="card">Фишка</param>
+        /// <param name="cardModel">Фишка</param>
         /// <returns>List_double -> список коэффициентов для данной фишка</returns>
         /// <exception cref="RumException">Исключение, если словари не были сформированы</exception>
-        public List<double> GetCoefficientsForCard(Card card)
+        public List<double> GetCoefficientsForCard(CardModel cardModel)
         {
             if (!Generated)
             {
                 throw new RumException(ExceptionType.CombinationMapError01, "Модель не былв сгенерирована");
             }
             var result = new List<double>();
-            int cardIndex = _cardMap[card];
+            int cardIndex = _cardMap[cardModel];
             for (int i = 0; i < _combinationMap.Count; i++)
             {
                 result.Add(_combinationCardMap[i, cardIndex]);
@@ -145,7 +145,7 @@ namespace MechanicsModel
         /// <param name="cardIndex">Индекс фишки</param>
         /// <returns>Card -> фишка</returns>
         /// <exception cref="RumException">Исключение, если словари не были сформированы</exception>
-        public Card GetCardByIndex(int cardIndex)
+        public CardModel GetCardByIndex(int cardIndex)
         {
             if (!Generated)
             {
@@ -159,7 +159,7 @@ namespace MechanicsModel
         /// IEnumerable фишек
         /// </summary>
         /// <exception cref="RumException">Исключение, если словари не были сформированы</exception>
-        public IEnumerable<Card> Cards
+        public IEnumerable<CardModel> Cards
         {
             get
             {
@@ -236,14 +236,14 @@ namespace MechanicsModel
                 {
                     foreach (CardColor color in new[] { CardColor.Red, CardColor.Yellow, CardColor.Black, CardColor.Blue })
                     {
-                        List<Card> newList = combination.Cards.ToList();
-                        newList.Add(new Card(color, number));
+                        List<CardModel> newList = combination.Cards.ToList();
+                        newList.Add(new CardModel(color, number));
                         result.Add(new CombinationModel(newList));
                     }
                 }
 
-                List<Card> newListForJoker = combination.Cards.ToList();
-                newListForJoker.Add(new Card(CardColor.Joker, 0));
+                List<CardModel> newListForJoker = combination.Cards.ToList();
+                newListForJoker.Add(new CardModel(CardColor.Joker, 0));
                 result.Add(new CombinationModel(newListForJoker));
             }
 
@@ -256,7 +256,7 @@ namespace MechanicsModel
         /// <returns>Список всех возможных комбинаций длины 3</returns>
         internal List<CombinationModel> GenerateAll3LengthVariations()
         {
-            var firstCombination = new List<CombinationModel>() {new CombinationModel(new List<Card>())};
+            var firstCombination = new List<CombinationModel>() {new CombinationModel(new List<CardModel>())};
             return GetAllVariations(GetAllVariations(GetAllVariations(firstCombination)));
         }
 

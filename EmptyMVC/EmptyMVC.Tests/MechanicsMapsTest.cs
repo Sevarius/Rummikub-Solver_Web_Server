@@ -19,7 +19,7 @@ namespace EmptyMVC.Tests
         public void CheckAllVariationsTest()
         {
             var combMap = new CombinationsMap();
-            var firstCombination = new List<CombinationModel>() { new CombinationModel(new List<Card>()) };
+            var firstCombination = new List<CombinationModel>() { new CombinationModel(new List<CardModel>()) };
             var res = combMap.GetAllVariations(firstCombination);
             Assert.Equal(53, res.Count);
         }

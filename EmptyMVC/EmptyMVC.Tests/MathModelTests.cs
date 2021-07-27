@@ -31,20 +31,20 @@ namespace EmptyMVC.Tests
         {
             var game = new GameModel
             {
-                Hand = new List<Card>
+                Hand = new List<CardModel>
                 {
-                    new Card(CardColor.Blue, 4),
-                    new Card(CardColor.Blue, 6)
+                    new CardModel(CardColor.Blue, 4),
+                    new CardModel(CardColor.Blue, 6)
                 },
                 Table = new List<CombinationModel>
                 {
-                    new CombinationModel(new List<Card>
+                    new CombinationModel(new List<CardModel>
                     {
-                        new Card(CardColor.Blue, 1),
-                        new Card(CardColor.Blue, 2),
-                        new Card(CardColor.Blue, 3),
-                        new Card(CardColor.Blue, 4),
-                        new Card(CardColor.Blue, 5)
+                        new CardModel(CardColor.Blue, 1),
+                        new CardModel(CardColor.Blue, 2),
+                        new CardModel(CardColor.Blue, 3),
+                        new CardModel(CardColor.Blue, 4),
+                        new CardModel(CardColor.Blue, 5)
                     })
                     {
                         isValid = true,
@@ -121,7 +121,7 @@ namespace EmptyMVC.Tests
             _testOutputHelper.WriteLine("solution done");
             
             model.Objective = Expression.Sum(varList);
-            Solver solver = new Solver(model, typeof(COIN.OsiCbcSolverInterface));
+            Solver solver = new Solver(model, typeof(OsiCbcSolverInterface));
             var cbc = (solver.OsiSolver as OsiCbcSolverInterface).getModelPtr() as CbcModel;
             cbc.setWarmStart(solution.ToArray());
             //cbc.setMaxSeconds(3);
@@ -154,7 +154,7 @@ namespace EmptyMVC.Tests
             _testOutputHelper.WriteLine("constraints done");
 
             model2.Objective = Expression.Sum(varList);
-            Solver solver2 = new Solver(model2, typeof(COIN.OsiCbcSolverInterface));
+            Solver solver2 = new Solver(model2, typeof(OsiCbcSolverInterface));
             cbc = (solver2.OsiSolver as OsiCbcSolverInterface).getModelPtr() as CbcModel;
             solver2.SetWarmStart(solver.GetWarmStart());
             cbc.setMaxSeconds(3);

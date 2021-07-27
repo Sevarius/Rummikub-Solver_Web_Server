@@ -16,7 +16,7 @@ namespace MechanicsModel
         /// <summary>
         /// Фишки на руке игрока
         /// </summary>
-        public List<Card> Hand { get; set; }
+        public List<CardModel> Hand { get; set; }
 
         /// <summary>
         /// Валидна ли игровая ситуация
@@ -26,21 +26,21 @@ namespace MechanicsModel
         /// <summary>
         /// Подсчёт количества повторений фишки в руке игрока
         /// </summary>
-        /// <param name="card">Фишка для подсчёта количества</param>
+        /// <param name="cardModel">Фишка для подсчёта количества</param>
         /// <returns>Количество повторений данной фишки в руке игрока</returns>
-        public int CountCardInHand(Card card)
+        public int CountCardInHand(CardModel cardModel)
         {
-            return Hand.Count(x => x.Equals(card));
+            return Hand.Count(x => x.Equals(cardModel));
         }
 
         /// <summary>
         /// Подсчёт количества повторений фишки в коминациях на столе
         /// </summary>
-        /// <param name="card">Фишка для подсчёта количества</param>
+        /// <param name="cardModel">Фишка для подсчёта количества</param>
         /// <returns>Количество повторений данной фишки в комбинациях на столе</returns>
-        public int CountCardOnTable(Card card)
+        public int CountCardOnTable(CardModel cardModel)
         {
-            return Table.Select(x => x.CountCard(card)).Sum();
+            return Table.Select(x => x.CountCard(cardModel)).Sum();
         }
     }
 }

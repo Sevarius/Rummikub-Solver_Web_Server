@@ -6,12 +6,12 @@ using System.Text;
 
 namespace MechanicsModel
 {
-    public class CombinationModel : IEnumerable<Card>
+    public class CombinationModel : IEnumerable<CardModel>
     {
         /// <summary>
         /// Последовательность фишек
         /// </summary>
-        public List<Card> Cards { get; }
+        public List<CardModel> Cards { get; }
 
         /// <summary>
         /// Тип комбинации
@@ -27,7 +27,7 @@ namespace MechanicsModel
         /// Создаёт комбинацию непроверенную фишек
         /// </summary>
         /// <param name="cards">Последовательность фишек</param>
-        public CombinationModel(List<Card> cards)
+        public CombinationModel(List<CardModel> cards)
         {
             Cards = cards;
             isValid = false;
@@ -37,30 +37,30 @@ namespace MechanicsModel
         /// <summary>
         /// Проверяет содержится ли комбинация данную фишку
         /// </summary>
-        /// <param name="card">Фишка для проверки</param>
+        /// <param name="cardModel">Фишка для проверки</param>
         /// <returns>Содержит или не содержит</returns>
-        public bool ContainsCard(Card card) => Cards.Contains(card);
+        public bool ContainsCard(CardModel cardModel) => Cards.Contains(cardModel);
 
         /// <summary>
         /// Возвращает количество повторений данной фишки в комбинации
         /// </summary>
-        /// <param name="card">Фишка</param>
+        /// <param name="cardModel">Фишка</param>
         /// <returns>Количество повторений</returns>
-        public int CountCard(Card card) => Cards.Count(x => x.Equals(card));
+        public int CountCard(CardModel cardModel) => Cards.Count(x => x.Equals(cardModel));
 
         /// <summary>
         /// Получение фишки из комбинации по индексу
         /// </summary>
         /// <param name="index">Индекс фишки</param>
         /// <returns>Фишка по индексу</returns>
-        public Card this[int index] => Cards[index];
+        public CardModel this[int index] => Cards[index];
 
         /// <summary>
         /// Длина комбинации
         /// </summary>
         public int Length => Cards.Count;
 
-        public IEnumerator<Card> GetEnumerator() => Cards.GetEnumerator();
+        public IEnumerator<CardModel> GetEnumerator() => Cards.GetEnumerator();
 
         /// <summary>
         /// Строковое представление комбинации
@@ -114,14 +114,14 @@ namespace MechanicsModel
                 return false;
             }
 
-            if (this.Type != otherComb.Type ||
-                this.isValid != otherComb.isValid ||
-                this.Cards.Count != otherComb.Cards.Count)
+            if (Type != otherComb.Type ||
+                isValid != otherComb.isValid ||
+                Cards.Count != otherComb.Cards.Count)
             {
                 return false;
             }
 
-            for (int i = 0; i < this.Cards.Count; i++)
+            for (int i = 0; i < Cards.Count; i++)
             {
                 if (!this[i].Equals(otherComb[i]))
                 {

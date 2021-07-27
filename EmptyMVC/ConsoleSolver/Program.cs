@@ -47,8 +47,8 @@ namespace ConsoleSolver
                     break;
                 }
 
-                var handCards = consoleString.Split(" ").ToList();
-                var hand = new List<Card>(handCards.Count);
+                var handCards = consoleString.Split(' ').ToList();
+                var hand = new List<CardModel>(handCards.Count);
                 handCards.ForEach(c => hand.Add(converter.StringToCard(c)));
 
                 var model = new MathProblem(new GameModel(){Hand = hand, Table = tableCombinations}, map);

@@ -4,9 +4,9 @@ using RumExceptions;
 
 namespace MechanicsModel
 {
-    public sealed class Card : IComparable<Card>
+    public sealed class CardModel : IComparable<CardModel>
     {
-        public Card(CardColor Color, int Number)
+        public CardModel(CardColor Color, int Number)
         {
             this.Color = Color;
 
@@ -33,7 +33,7 @@ namespace MechanicsModel
 
         public int Number { get; }
 
-        public bool IsJoker => this.Color == CardColor.Joker;
+        public bool IsJoker => Color == CardColor.Joker;
 
         /// <summary>
         /// Возвращает строковое представление фишки
@@ -47,7 +47,7 @@ namespace MechanicsModel
 
         public override bool Equals(object obj)
         {
-            var anotherCard = obj as Card;
+            var anotherCard = obj as CardModel;
 
             if (anotherCard is null)
             {
@@ -64,10 +64,10 @@ namespace MechanicsModel
 
         public override int GetHashCode()
         {
-            return this.Number + (int)this.Color;
+            return Number + (int)Color;
         }
 
-        public int CompareTo(Card other)
+        public int CompareTo(CardModel other)
         {
             var colorCompare = ((int)Color).CompareTo((int)other.Color);
 
@@ -79,19 +79,19 @@ namespace MechanicsModel
             return colorCompare;
         }
 
-        public static List<Card> AllPossibleCards()
+        public static List<CardModel> AllPossibleCards()
         {
-            var res = new List<Card>(13 * 4 + 1);
+            var res = new List<CardModel>(13 * 4 + 1);
 
             for (var i = 1; i <= 13; i++)
             {
                 foreach (CardColor color in new []{CardColor.Black, CardColor.Blue, CardColor.Red, CardColor.Yellow})
                 {
-                    res.Add(new Card(color, i));
+                    res.Add(new CardModel(color, i));
                 }
             }
 
-            res.Add(new Card(CardColor.Joker, 0));
+            res.Add(new CardModel(CardColor.Joker, 0));
 
             return res;
         }

@@ -11,21 +11,21 @@ namespace EmptyMVC.Tests
         {
             var combinationList = new List<CombinationModel>()
             {
-                new CombinationModel(new List<Card>()
+                new CombinationModel(new List<CardModel>()
                 {
-                    new Card(CardColor.Red, 1),
-                    new Card(CardColor.Red, 2),
-                    new Card(CardColor.Red, 3),
+                    new CardModel(CardColor.Red, 1),
+                    new CardModel(CardColor.Red, 2),
+                    new CardModel(CardColor.Red, 3),
                 })
                 {
                     isValid = true,
                     Type = CombinationType.Color
                 },
-                new CombinationModel(new List<Card>()
+                new CombinationModel(new List<CardModel>()
                 {
-                    new Card(CardColor.Red, 1),
-                    new Card(CardColor.Red, 2),
-                    new Card(CardColor.Red, 3),
+                    new CardModel(CardColor.Red, 1),
+                    new CardModel(CardColor.Red, 2),
+                    new CardModel(CardColor.Red, 3),
                 })
                 {
                     isValid = true,
@@ -38,21 +38,21 @@ namespace EmptyMVC.Tests
 
             combinationList = new List<CombinationModel>()
             {
-                new CombinationModel(new List<Card>()
+                new CombinationModel(new List<CardModel>()
                 {
-                    new Card(CardColor.Red, 1),
-                    new Card(CardColor.Red, 2),
-                    new Card(CardColor.Red, 3),
+                    new CardModel(CardColor.Red, 1),
+                    new CardModel(CardColor.Red, 2),
+                    new CardModel(CardColor.Red, 3),
                 })
                 {
                     isValid = true,
                     Type = CombinationType.Color
                 },
-                new CombinationModel(new List<Card>()
+                new CombinationModel(new List<CardModel>()
                 {
-                    new Card(CardColor.Red, 2),
-                    new Card(CardColor.Red, 3),
-                    new Card(CardColor.Red, 4),
+                    new CardModel(CardColor.Red, 2),
+                    new CardModel(CardColor.Red, 3),
+                    new CardModel(CardColor.Red, 4),
                 })
                 {
                     isValid = true,

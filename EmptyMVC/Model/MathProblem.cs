@@ -22,7 +22,7 @@ namespace MathModel
             _map = map;
         }
 
-        public (List<CombinationModel>, List<Card>, double) Solve()
+        public (List<CombinationModel>, List<CardModel>, double) Solve()
         {
             var model = new Model("Rummikub model");
             (var combinationVariables, var cardVariables) = ConstructVariables();
@@ -45,7 +45,7 @@ namespace MathModel
             if (solver.IsProvenOptimal)
             {
                 var combinationsOnTable = new List<CombinationModel>();
-                var cardsToPutFromHand = new List<Card>();
+                var cardsToPutFromHand = new List<CardModel>();
 
                 for (var i = 0; i < combinationVariables.Count; i++)
                 {
@@ -100,7 +100,7 @@ namespace MathModel
             var tableConstraints = new List<Constraint>();
             var handConstraints = new List<Constraint>();
 
-            foreach (Card card in _map.Cards)
+            foreach (CardModel card in _map.Cards)
             {
                 var lhsTableConstraint = Expression.ScalarProduct(_map.GetCoefficientsForCard(card), combinationVariables);
                 var rhsTableConstraint = _game.CountCardOnTable(card) + cardVariables[_map.GetCardIndex(card)];
