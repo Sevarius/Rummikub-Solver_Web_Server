@@ -1,15 +1,71 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
     <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{C63A4B4D-9089-4502-BA69-CD5E30A3DE9C}</ProjectGuid>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net47</TargetFramework>
-        <LangVersion>7.3</LangVersion>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>ConsoleSolver</RootNamespace>
+        <AssemblyName>ConsoleSolver</AssemblyName>
+        <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
     </PropertyGroup>
-
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>x86</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
     <ItemGroup>
-      <ProjectReference Include="..\MechanicsModel\MechanicsModel.csproj" />
-      <ProjectReference Include="..\Model\MathModel.csproj" />
-      <ProjectReference Include="..\RumExceptions\RumExceptions.csproj" />
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Xml" />
     </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Program.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\DTOModel\DTOModel.csproj">
+        <Project>{41048e9f-83e3-4337-9c61-ced466c66f38}</Project>
+        <Name>DTOModel</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\MechanicsModel\MechanicsModel.csproj">
+        <Project>{9a4ac7bd-b501-4905-980b-f2b5e9aba15c}</Project>
+        <Name>MechanicsModel</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\Model\MathModel.csproj">
+        <Project>{768b9c58-f9b3-437e-97a6-e56fe796ff78}</Project>
+        <Name>MathModel</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\RumExceptions\RumExceptions.csproj">
+        <Project>{8b9ab72b-5409-4fef-94c5-51a5fd5199cf}</Project>
+        <Name>RumExceptions</Name>
+      </ProjectReference>
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
 
 </Project>

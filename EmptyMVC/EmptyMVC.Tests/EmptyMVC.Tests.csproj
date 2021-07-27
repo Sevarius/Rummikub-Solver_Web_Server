@@ -28,7 +28,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -101,7 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DTOModel\DTOModel.csproj">
-      <Project>{b461641a-3e77-42a3-8143-73e876bf7a88}</Project>
+      <Project>{41048e9f-83e3-4337-9c61-ced466c66f38}</Project>
       <Name>DTOModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\EmptyMVC\EmptyMVC.csproj">

@@ -32,6 +32,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,8 +42,13 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005">
+      <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -101,6 +107,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\JsonNetResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +124,28 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Home\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DTOModel\DTOModel.csproj">
+      <Project>{41048e9f-83e3-4337-9c61-ced466c66f38}</Project>
+      <Name>DTOModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapper\Mapper.csproj">
+      <Project>{49d1311a-ac35-448c-bc01-e9574d163e8b}</Project>
+      <Name>Mapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MechanicsModel\MechanicsModel.csproj">
+      <Project>{9a4ac7bd-b501-4905-980b-f2b5e9aba15c}</Project>
+      <Name>MechanicsModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\MathModel.csproj">
+      <Project>{768b9c58-f9b3-437e-97a6-e56fe796ff78}</Project>
+      <Name>MathModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RumExceptions\RumExceptions.csproj">
+      <Project>{8b9ab72b-5409-4fef-94c5-51a5fd5199cf}</Project>
+      <Name>RumExceptions</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

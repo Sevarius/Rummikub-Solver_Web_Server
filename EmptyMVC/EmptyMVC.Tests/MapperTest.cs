@@ -67,5 +67,13 @@ namespace EmptyMVC.Tests
 
             Assert.Equal(combinationModel, mapperCombinationModel);
         }
+
+        [Fact]
+        public void ReverseMapTest()
+        {
+            var cardModel = new CardModel(CardColor.Black, 5);
+
+            var cardDto = _mapper.Map<CardDto>(cardModel);
+        }
     }
 }

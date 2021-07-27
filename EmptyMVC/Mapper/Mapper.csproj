@@ -13,7 +13,7 @@
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
+        <PlatformTarget>x86</PlatformTarget>
         <DebugSymbols>true</DebugSymbols>
         <DebugType>full</DebugType>
         <Optimize>false</Optimize>
@@ -45,7 +45,7 @@
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\DTOModel\DTOModel.csproj">
-        <Project>{b461641a-3e77-42a3-8143-73e876bf7a88}</Project>
+        <Project>{41048e9f-83e3-4337-9c61-ced466c66f38}</Project>
         <Name>DTOModel</Name>
       </ProjectReference>
       <ProjectReference Include="..\MechanicsModel\MechanicsModel.csproj">

@@ -10,11 +10,11 @@ namespace Mapper
         {
             CreateMap<string, CardColor>().ConvertUsing<StringCardColorConverter>();
 
-            CreateMap<CardDto, CardModel>(MemberList.Source);
+            CreateMap<CardDto, CardModel>(MemberList.Source).ReverseMap();
 
-            CreateMap<CombinationDto, CombinationModel>(MemberList.Source);
+            CreateMap<CombinationDto, CombinationModel>(MemberList.Source).ReverseMap();
 
-            CreateMap<GameDto, GameModel>(MemberList.Source);
+            CreateMap<GameDto, GameModel>(MemberList.Source).ReverseMap();
         }
     }
 }
