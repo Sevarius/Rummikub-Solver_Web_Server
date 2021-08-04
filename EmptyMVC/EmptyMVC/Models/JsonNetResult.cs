@@ -5,10 +5,17 @@ using Newtonsoft.Json;
 
 namespace EmptyMVC.Models
 {
+    public static class ResponseFactory
+    {
+        public static JsonNetResult<T> MakeJsonResponse<T>(T data) where T : class
+        {
+            return new JsonNetResult<T>(data);
+        }
+    }
     public sealed class JsonNetResult<T> : ActionResult where T : class
     {
         private readonly T _data;
-        public JsonNetResult(T data)
+        internal JsonNetResult(T data)
         {
             _data = data;
         }
